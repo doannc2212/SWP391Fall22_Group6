@@ -20,8 +20,7 @@ export default function RoleBasedGuard({ hasContent, roles, children }: RoleBase
   // Logic here to get current user role
   const { user } = useAuth();
 
-  const account = user?.account;
-  const currentRole = account?.roleName;
+  const currentRole = user?.role;
 
   if (typeof roles !== 'undefined' && !roles.includes(currentRole)) {
     return hasContent ? (

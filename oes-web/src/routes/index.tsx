@@ -1,21 +1,20 @@
-import { Suspense, lazy, ElementType } from 'react';
-import { Navigate, useRoutes, useLocation, Outlet } from 'react-router-dom';
+import { ElementType, lazy, Suspense } from 'react';
+import { Navigate, Outlet, useLocation, useRoutes } from 'react-router-dom';
 // hooks
 import useAuth from '../hooks/useAuth';
 // layouts
-import MainLayout from '../layouts/main';
 import DashboardLayout from '../layouts/dashboard';
 import LogoOnlyLayout from '../layouts/LogoOnlyLayout';
 // guards
-import GuestGuard from '../guards/GuestGuard';
 import AuthGuard from '../guards/AuthGuard';
+import GuestGuard from '../guards/GuestGuard';
 // import RoleBasedGuard from '../guards/RoleBasedGuard';
 // config
 import { PATH_AFTER_LOGIN } from '../config';
 // components
+import RoleBasedGuard from 'src/guards/RoleBasedGuard';
 import LoadingScreen from '../components/LoadingScreen';
 import { PATH_DASHBOARD } from './paths';
-import RoleBasedGuard from 'src/guards/RoleBasedGuard';
 
 // ----------------------------------------------------------------------
 
@@ -73,11 +72,7 @@ export default function Router() {
       children: [
         { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
         { path: 'app', element: <GeneralApp /> },
-        { path: 'analytics', element: <GeneralAnalytics /> },
-        { path: 'banking', element: <GeneralBanking /> },
-        { path: 'booking', element: <GeneralBooking /> },
         {
-          path: 'student',
           element: (
             <RoleBasedGuard hasContent roles={['STUDENT']}>
               <Outlet />
@@ -97,7 +92,6 @@ export default function Router() {
           ],
         },
         {
-          path: 'lecturer',
           element: (
             <RoleBasedGuard hasContent roles={['LECTURER']}>
               <Outlet />
@@ -127,21 +121,14 @@ export default function Router() {
       path: '*',
       element: <LogoOnlyLayout />,
       children: [
-        { path: 'payment', element: <Payment /> },
         { path: '500', element: <Page500 /> },
         { path: '404', element: <Page404 /> },
         { path: '403', element: <Page403 /> },
         { path: '*', element: <Navigate to="/404" replace /> },
       ],
     },
-    {
-      path: '/',
-      element: <MainLayout />,
-      children: [
-        { element: <Navigate to="/auth/login" replace />, index: true },
-        { path: 'about-us', element: <About /> },
-      ],
-    },
+
+    { path: '/', element: <Navigate to="/dashboard" replace /> },
     { path: '*', element: <Navigate to="/404" replace /> },
   ]);
 }
@@ -153,12 +140,7 @@ const NewPassword = Loadable(lazy(() => import('../pages/auth/NewPassword')));
 const VerifyCode = Loadable(lazy(() => import('../pages/auth/VerifyCode')));
 
 const GeneralApp = Loadable(lazy(() => import('../pages/dashboard/GeneralApp')));
-const GeneralAnalytics = Loadable(lazy(() => import('../pages/dashboard/GeneralAnalytics')));
-const GeneralBanking = Loadable(lazy(() => import('../pages/dashboard/GeneralBanking')));
-const GeneralBooking = Loadable(lazy(() => import('../pages/dashboard/GeneralBooking')));
 
-const About = Loadable(lazy(() => import('../pages/About')));
-const Payment = Loadable(lazy(() => import('../pages/Payment')));
 const Page500 = Loadable(lazy(() => import('../pages/Page500')));
 const Page403 = Loadable(lazy(() => import('../pages/Page403')));
 const Page404 = Loadable(lazy(() => import('../pages/Page404')));

@@ -29,6 +29,7 @@ export const PATH_PAGE = {
 
 export const PATH_DASHBOARD = {
   root: ROOTS_DASHBOARD,
+  app: ROOTS_DASHBOARD + '/app',
   examination: {
     root: path(ROOTS_DASHBOARD, '/examination'),
     list: path(ROOTS_DASHBOARD, '/examination/list'),

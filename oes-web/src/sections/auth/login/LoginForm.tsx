@@ -20,7 +20,7 @@ import { error } from 'console';
 // ----------------------------------------------------------------------
 
 type FormValuesProps = {
-  username: string;
+  email: string;
   password: string;
   remember: boolean;
   afterSubmit?: string;
@@ -28,14 +28,10 @@ type FormValuesProps = {
 
 export default function LoginForm() {
   const { login } = useAuth();
-
-  const isMountedRef = useIsMountedRef();
-  const [status, setStatus] = useState(0);
-  const [message, setMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   const LoginSchema = Yup.object().shape({
-    username: Yup.string().required('Username is required'),
+    email: Yup.string().required('Email is required').email('Email is invalid'),
     password: Yup.string().required('Password is required'),
   });
 
@@ -59,7 +55,7 @@ export default function LoginForm() {
 
   const onSubmit = async (data: FormValuesProps) => {
     try {
-      await login(data.username, data.password);
+      await login(data.email, data.password);
     } catch (error) {
       reset();
       // if (isMountedRef.current) {
@@ -73,7 +69,7 @@ export default function LoginForm() {
       <Stack spacing={3}>
         {!!errors.afterSubmit && <Alert severity="error">{errors.afterSubmit.message}</Alert>}
 
-        <RHFTextField name="username" label="Username" />
+        <RHFTextField name="email" label="Email" />
 
         <RHFTextField
           name="password"
