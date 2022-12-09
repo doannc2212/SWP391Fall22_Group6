@@ -17,8 +17,25 @@ const studentNavConfig = [
 const lectureNavConfig = [
   {
     subheader: 'Application',
-    items: [{ title: 'request', path: PATH_DASHBOARD.subject.root, icon: ICONS.request }],
+    items: [
+      { title: 'topic', path: PATH_DASHBOARD.subject.root, icon: ICONS.request },
+      { title: 'subject', path: PATH_DASHBOARD.subject.root, icon: ICONS.request },
+      { title: 'examination report', path: PATH_DASHBOARD.subject.root, icon: ICONS.request },
+      { title: 'question', path: PATH_DASHBOARD.subject.root, icon: ICONS.request },
+    ],
   },
 ];
 
-export { lectureNavConfig, studentNavConfig };
+const adminNavConfig = [
+  {
+    subheader: 'Management',
+    items: [
+      { title: 'topic', path: PATH_DASHBOARD.subject.root, icon: ICONS.request },
+      { title: 'subject', path: PATH_DASHBOARD.subject.root, icon: ICONS.request },
+      { title: 'question bank', path: PATH_DASHBOARD.subject.root, icon: ICONS.request },
+    ],
+  },
+];
+
+
+export { lectureNavConfig, studentNavConfig, adminNavConfig };
