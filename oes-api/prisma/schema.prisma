@@ -26,6 +26,7 @@ model User {
   firstname   String?
   lastname    String?
   role        Role
+  avatar      String?
   subject     UserSubject[]
   examination Examination[]
   invigilate  Invigilate[]
@@ -116,6 +117,7 @@ model UserSubject {
 
 model Subject {
   id        String        @id @default(auto()) @map("_id") @db.ObjectId
+  code      String
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
   name      String
