@@ -5,6 +5,7 @@ import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 import Page from 'src/components/Page';
 import useSettings from 'src/hooks/useSettings';
 import { PATH_DASHBOARD } from 'src/routes/paths';
+import SubjectNewEditForm from 'src/sections/subject/form/SubjectNewEditForm';
 import axiosInstance from 'src/utils/axios';
 
 export default function SubjectEdit() {
@@ -18,14 +19,13 @@ export default function SubjectEdit() {
 
   const fetch = useCallback(async (id: string) => {
     try {
-      const response = await axiosInstance.get('/subject', {
+      const response: any = await axiosInstance.get('/subject', {
         params: { id },
       });
-      if (response.status === 200) {
-        setData(response.data);
-      } else {
-        navigate(PATH_DASHBOARD.subject.root);
+      if (response.error) {
+        throw Error(response.error);
       }
+      setData(response);
     } catch (e) {
       console.error(e);
     }
@@ -60,7 +60,7 @@ export default function SubjectEdit() {
             { name: title },
           ]}
         />
-        {/* <AccountNewEditForm isEdit={true} currentAccount={data} /> */}
+       <SubjectNewEditForm currentSubject={data} isEdit={true} />
       </Container>
     </Page>
   );

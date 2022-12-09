@@ -29,7 +29,7 @@ const TABLE_HEAD = [
   { id: '' },
 ];
 
-export default function SubjectList() {
+export default function ExaminationReportList() {
   const { themeStretch } = useSettings();
 
   const navigate = useNavigate();
@@ -73,7 +73,7 @@ export default function SubjectList() {
         // "keyword": "a",
         // "orderBy": "name",
         // "sort": "asc"
-        const response: any = await axiosInstance.post('/subject/search', {
+        const response: any = await axiosInstance.post('/exanmination_report/search', {
           pageNum: page + 1,
           pageSize: rowsPerPage,
           keyword: value,
@@ -104,17 +104,17 @@ export default function SubjectList() {
   const total = 10;
 
   return (
-    <Page title="Subject: Listing">
+    <Page title="Topic: Listing">
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <HeaderBreadcrumbs
-          heading="Subject: Listing"
+          heading="Topic: Listing"
           links={[
             {
               name: 'Dashboard',
               href: PATH_DASHBOARD.root,
             },
             {
-              name: 'Subject',
+              name: 'Topic',
               href: PATH_DASHBOARD.subject.root,
             },
             { name: 'Listing' },

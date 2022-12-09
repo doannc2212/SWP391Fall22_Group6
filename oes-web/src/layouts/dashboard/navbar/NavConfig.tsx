@@ -18,10 +18,10 @@ const lectureNavConfig = [
   {
     subheader: 'Application',
     items: [
-      { title: 'topic', path: PATH_DASHBOARD.subject.root, icon: ICONS.request },
+      { title: 'topic', path: PATH_DASHBOARD.topic.root, icon: ICONS.request },
       { title: 'subject', path: PATH_DASHBOARD.subject.root, icon: ICONS.request },
-      { title: 'examination report', path: PATH_DASHBOARD.subject.root, icon: ICONS.request },
-      { title: 'question', path: PATH_DASHBOARD.subject.root, icon: ICONS.request },
+      { title: 'examination report', path: PATH_DASHBOARD.examination_report.root, icon: ICONS.request },
+      { title: 'question', path: PATH_DASHBOARD.question.root, icon: ICONS.request },
     ],
   },
 ];
@@ -36,6 +36,5 @@ const adminNavConfig = [
     ],
   },
 ];
-
 
 export { lectureNavConfig, studentNavConfig, adminNavConfig };
