@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { Card, Stack } from '@mui/material';
+import { Button, Card, Stack } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
@@ -17,8 +17,8 @@ type Props = {
 
 export default function SubjectNewEditForm({ currentSubject, isEdit }: Props) {
   const SubjectSchema = Yup.object().shape({
-    code: Yup.string().required('Code is required'),
-    name: Yup.string().required('Name is required'),
+    code: Yup.string().required('Code is required').min(1, 'Code must not be empty'),
+    name: Yup.string().required('Name is required').min(1, 'Code must not be empty'),
   });
 
   const defaultValues = {
@@ -48,6 +48,23 @@ export default function SubjectNewEditForm({ currentSubject, isEdit }: Props) {
       console.log(error);
     }
   }, []);
+
+  const deleteSubject = useCallback(async (id: string) => {
+    try {
+      const response: any = await axiosInstance.delete('/subject', {
+        params: { id },
+      });
+      if (response.error) {
+        throw Error(response.message);
+      }
+      enqueueSnackbar('Delete successful', { variant: 'success' });
+      navigate(PATH_DASHBOARD.subject.root);
+    } catch (error) {
+      enqueueSnackbar(error, { variant: 'error' });
+      console.log(error);
+    }
+  }, []);
+
   const updateSubject = useCallback(async (data: any) => {
     try {
       const response: any = await axiosInstance.put('/subject', data);
@@ -66,6 +83,10 @@ export default function SubjectNewEditForm({ currentSubject, isEdit }: Props) {
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
+
+  const handleDelete = () => {
+    deleteSubject(currentSubject!.id);
+  };
 
   const onSubmit = (data: any) => {
     if (!currentSubject) {
@@ -97,6 +118,11 @@ export default function SubjectNewEditForm({ currentSubject, isEdit }: Props) {
             <LoadingButton loading={isSubmitting} variant="contained" type="submit">
               {currentSubject && isEdit ? 'Save' : 'Create'}
             </LoadingButton>
+            {currentSubject && (
+              <Button variant="contained" onClick={handleDelete}>
+                Delete
+              </Button>
+            )}
           </Stack>
         </Card>
       </FormProvider>
