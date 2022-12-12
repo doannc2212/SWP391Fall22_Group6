@@ -115,14 +115,14 @@ export default function SubjectNewEditForm({ currentSubject, isEdit }: Props) {
             <RHFTextField name="name" label="Name" />
           </Stack>
           <Stack mt={3} direction="row" justifyContent="end" textAlign="end" spacing={2}>
-            <LoadingButton loading={isSubmitting} variant="contained" type="submit">
-              {currentSubject && isEdit ? 'Save' : 'Create'}
-            </LoadingButton>
             {currentSubject && (
-              <Button variant="contained" onClick={handleDelete}>
+              <Button variant="outlined" color="error" onClick={handleDelete}>
                 Delete
               </Button>
             )}
+            <LoadingButton loading={isSubmitting} variant="contained" type="submit">
+              {currentSubject && isEdit ? 'Save' : 'Create'}
+            </LoadingButton>
           </Stack>
         </Card>
       </FormProvider>
