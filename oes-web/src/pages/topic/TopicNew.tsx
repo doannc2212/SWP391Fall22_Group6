@@ -3,29 +3,28 @@ import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 import Page from 'src/components/Page';
 import useSettings from 'src/hooks/useSettings';
 import { PATH_DASHBOARD } from 'src/routes/paths';
-import SubjectNewEditForm from 'src/sections/subject/form/SubjectNewEditForm';
 
-export default function SubjectNew() {
+export default function TopicNew() {
   const { themeStretch } = useSettings();
 
   return (
-    <Page title="Subject: New">
+    <Page title="Topic: New">
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <HeaderBreadcrumbs
-          heading="Create Subject"
+          heading="Create Topic"
           links={[
             {
               name: 'Dashboard',
               href: PATH_DASHBOARD.root,
             },
             {
-              name: 'Subject',
+              name: 'Topic',
               href: PATH_DASHBOARD.subject.root,
             },
             { name: 'New' },
           ]}
         />
-        <SubjectNewEditForm currentSubject={null} isEdit={true} />
+        {/* <AccountNewEditForm isEdit={false} currentAccount={null} /> */}
       </Container>
     </Page>
   );

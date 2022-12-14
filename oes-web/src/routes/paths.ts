@@ -43,6 +43,28 @@ export const PATH_DASHBOARD = {
     edit: (id: string) => path(ROOTS_DASHBOARD, `/subject/edit/${id}`),
     view: (id: string) => path(ROOTS_DASHBOARD, `/subject/view/${id}`),
   },
+  topic: {
+    root: path(ROOTS_DASHBOARD, '/topic'),
+    list: path(ROOTS_DASHBOARD, '/topic/list'),
+    new: path(ROOTS_DASHBOARD, '/topic/new'),
+    edit: (id: string) => path(ROOTS_DASHBOARD, `/topic/edit/${id}`),
+    view: (id: string) => path(ROOTS_DASHBOARD, `/topic/view/${id}`),
+  },
+  examination_report: {
+    root: path(ROOTS_DASHBOARD, '/examination_report'),
+    list: path(ROOTS_DASHBOARD, '/examination_report/list'),
+    new: path(ROOTS_DASHBOARD, '/examination_report/new'),
+    edit: (id: string) => path(ROOTS_DASHBOARD, `/examination_report/edit/${id}`),
+    view: (id: string) => path(ROOTS_DASHBOARD, `/examination_report/view/${id}`),
+  },
+  question: {
+    root: path(ROOTS_DASHBOARD, '/question'),
+    list: path(ROOTS_DASHBOARD, '/question/list'),
+    new: path(ROOTS_DASHBOARD, '/question/new'),
+    edit: (id: string) => path(ROOTS_DASHBOARD, `/question/edit/${id}`),
+    view: (id: string) => path(ROOTS_DASHBOARD, `/question/view/${id}`),
+  },
+
   permissionDenied: path(ROOTS_DASHBOARD, '/permission-denied'),
 };
 

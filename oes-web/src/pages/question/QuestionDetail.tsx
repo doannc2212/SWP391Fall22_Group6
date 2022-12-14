@@ -6,10 +6,9 @@ import HeaderBreadcrumbs from 'src/components/HeaderBreadcrumbs';
 import Page from 'src/components/Page';
 import useSettings from 'src/hooks/useSettings';
 import { PATH_DASHBOARD } from 'src/routes/paths';
-import SubjectNewEditForm from 'src/sections/subject/form/SubjectNewEditForm';
 import axiosInstance from 'src/utils/axios';
 
-export default function SubjectDetail() {
+export default function QuestionDetail() {
   const { themeStretch } = useSettings();
 
   const { id = '' } = useParams();
@@ -20,7 +19,7 @@ export default function SubjectDetail() {
 
   const fetch = useCallback(async (id: string) => {
     try {
-      const response = await axiosInstance.get('/subject', {
+      const response = await axiosInstance.get('/topic', {
         params: { id },
       });
       if (response.status === 200) {
@@ -39,14 +38,14 @@ export default function SubjectDetail() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  const title = data?.name || 'Subject';
+  const title = data?.name || 'Topic';
 
   if (!data) {
     return <div />;
   }
 
   return (
-    <Page title="Subject: Detail">
+    <Page title="Topic: Detail">
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <HeaderBreadcrumbs
           heading={title}
@@ -56,13 +55,13 @@ export default function SubjectDetail() {
               href: PATH_DASHBOARD.root,
             },
             {
-              name: 'Subject',
+              name: 'Topic',
               href: PATH_DASHBOARD.subject.root,
             },
             { name: title },
           ]}
         />
-        <SubjectNewEditForm currentSubject={data} isEdit={false} />
+        {/* <AccountNewEditForm isEdit={false} currentAccount={data} /> */}
       </Container>
     </Page>
   );

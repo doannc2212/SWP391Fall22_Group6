@@ -111,6 +111,45 @@ export default function Router() {
                 { path: 'view/:id', element: <SubjectDetailPage /> },
               ],
             },
+            {
+              path: 'topic',
+              children: [
+                {
+                  element: <Navigate to={PATH_DASHBOARD.topic.list} replace />,
+                  index: true,
+                },
+                { path: 'list', element: <TopicListPage /> },
+                { path: 'new', element: <TopicNewPage /> },
+                { path: 'edit/:id', element: <TopicEditPage /> },
+                { path: 'view/:id', element: <TopicDetailPage /> },
+              ],
+            },
+            {
+              path: 'examination_report',
+              children: [
+                {
+                  element: <Navigate to={PATH_DASHBOARD.examination_report.list} replace />,
+                  index: true,
+                },
+                { path: 'list', element: <ExaminationReportListPage /> },
+                { path: 'new', element: <ExaminationReportNewPage /> },
+                { path: 'edit/:id', element: <ExaminationReportEditPage /> },
+                { path: 'view/:id', element: <ExaminationReportDetailPage /> },
+              ],
+            },
+            {
+              path: 'question',
+              children: [
+                {
+                  element: <Navigate to={PATH_DASHBOARD.question.list} replace />,
+                  index: true,
+                },
+                { path: 'list', element: <QuestionistPage /> },
+                { path: 'new', element: <QuestionNewPage /> },
+                { path: 'edit/:id', element: <QuestionEditPage /> },
+                { path: 'view/:id', element: <QuestionDetailPage /> },
+              ],
+            },
           ],
         },
       ],
@@ -149,5 +188,28 @@ const SubjectListPage = Loadable(lazy(() => import('../pages/subject/SubjectList
 const SubjectDetailPage = Loadable(lazy(() => import('../pages/subject/SubjectDetail')));
 const SubjectEditPage = Loadable(lazy(() => import('../pages/subject/SubjectEdit')));
 const SubjectNewPage = Loadable(lazy(() => import('../pages/subject/SubjectNew')));
+
+const TopicListPage = Loadable(lazy(() => import('../pages/topic/TopicList')));
+const TopicDetailPage = Loadable(lazy(() => import('../pages/topic/TopicDetail')));
+const TopicEditPage = Loadable(lazy(() => import('../pages/topic/TopicEdit')));
+const TopicNewPage = Loadable(lazy(() => import('../pages/topic/TopicNew')));
+
+const QuestionistPage = Loadable(lazy(() => import('../pages/question/QuestionList')));
+const QuestionDetailPage = Loadable(lazy(() => import('../pages/question/QuestionDetail')));
+const QuestionEditPage = Loadable(lazy(() => import('../pages/question/QuestionEdit')));
+const QuestionNewPage = Loadable(lazy(() => import('../pages/question/QuestionNew')));
+
+const ExaminationReportListPage = Loadable(
+  lazy(() => import('../pages/examination_report/ExaminationReportList'))
+);
+const ExaminationReportDetailPage = Loadable(
+  lazy(() => import('../pages/examination_report/ExaminationReportDetail'))
+);
+const ExaminationReportEditPage = Loadable(
+  lazy(() => import('../pages/examination_report/ExaminationReportEdit'))
+);
+const ExaminationReportNewPage = Loadable(
+  lazy(() => import('../pages/examination_report/ExaminationReportNew'))
+);
 
 const ExaminationListPage = Loadable(lazy(() => import('../pages/examination/ExaminationList')));
