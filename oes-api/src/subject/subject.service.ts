@@ -1,8 +1,12 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+} from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'nestjs-prisma';
-import { SearchInput } from 'src/common/models/search-input.model';
 import { CreateSubjectInput } from './dto/create-subject-input';
+import { SearchSubjectInput } from './dto/search-subject-input';
 import { UpdateSubjectInput } from './dto/update-subject-input';
 
 @Injectable()
@@ -11,8 +15,8 @@ export class SubjectService {
 
   async getSubject(id: string) {
     try {
-      const response = await this.prisma.subject.findUnique({
-        where: { id },
+      const response = await this.prisma.subject.findFirst({
+        where: { id, isEnabled: true },
       });
       return response;
     } catch (e) {
@@ -22,16 +26,17 @@ export class SubjectService {
       ) {
         throw new BadRequestException(`Subject not found.`);
       }
-      throw new Error(e);
+      throw e;
     }
   }
 
   async updateMultipleSubject(ids: string[], data: UpdateSubjectInput) {
     try {
       const response = await this.prisma.subject.updateMany({
-        where: { id: { in: ids } },
+        where: { id: { in: ids }, isEnabled: true },
         data: data,
       });
+
       return response;
     } catch (e) {
       if (
@@ -40,7 +45,7 @@ export class SubjectService {
       ) {
         throw new BadRequestException(`Subject not found.`);
       }
-      throw new Error(e);
+      throw e;
     }
   }
 
@@ -58,7 +63,7 @@ export class SubjectService {
       ) {
         throw new BadRequestException(`Subject not found.`);
       }
-      throw new Error(e);
+      throw e;
     }
   }
 
@@ -80,7 +85,7 @@ export class SubjectService {
     }
   }
 
-  searchSubject(data: SearchInput) {
+  searchSubject(data: SearchSubjectInput) {
     const { keyword, pageNum, pageSize, orderBy, sort } = data;
 
     return this.prisma.subject.findMany({
@@ -95,11 +100,20 @@ export class SubjectService {
   }
 
   async createSubject(data: CreateSubjectInput) {
-    const { name } = data;
+    const { name, code } = data;
     try {
+      const subject = await this.prisma.subject.findFirst({
+        where: { code: code, isEnabled: true },
+      });
+      if (subject) {
+        throw new ConflictException(
+          `Subject with code ${code} already exists.`
+        );
+      }
       const response = await this.prisma.subject.create({
         data: {
           name: name,
+          code: code,
         },
       });
       return response;
@@ -110,7 +124,7 @@ export class SubjectService {
       ) {
         throw new BadRequestException(`Subject not found.`);
       }
-      throw new Error(e);
+      throw e;
     }
   }
 }

@@ -69,6 +69,8 @@ input UpdateUserInput {
 }
 
 type User {
+  avatar: String
+
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
   email: String!

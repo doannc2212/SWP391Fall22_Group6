@@ -22,6 +22,7 @@ async function main() {
       role: 'STUDENT',
     },
   });
+
   const user2 = await prisma.user.create({
     data: {
       email: 'dang@oes.com',
@@ -32,7 +33,17 @@ async function main() {
     },
   });
 
-  console.log({ user1, user2 });
+  const user3 = await prisma.user.create({
+    data: {
+      email: 'thien@oes.com',
+      firstname: 'Dang Van',
+      lastname: 'Thien',
+      role: 'STUDENT',
+      password: '$2b$10$EpRnTzVlqHNP0.fUbXUwSOyuiXe/QLSUG6xNekdHgTGmrpHEfIoxm', // secret42
+    },
+  });
+
+  console.log({ user1, user2, user3 });
 }
 
 main()

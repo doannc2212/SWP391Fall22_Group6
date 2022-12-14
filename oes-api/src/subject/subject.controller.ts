@@ -12,8 +12,8 @@ import {
 import { Subject } from '@prisma/client';
 import { Request } from 'express';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { SearchInput } from 'src/common/models/search-input.model';
 import { CreateSubjectInput } from './dto/create-subject-input';
+import { SearchSubjectInput } from './dto/search-subject-input';
 import { UpdateSubjectInput } from './dto/update-subject-input';
 import { SubjectService } from './subject.service';
 
@@ -49,7 +49,7 @@ export class SubjectController {
   }
 
   @Post('search')
-  async searchSubject(@Body() data: SearchInput): Promise<Subject[]> {
+  async searchSubject(@Body() data: SearchSubjectInput): Promise<Subject[]> {
     return this.subjectService.searchSubject(data);
   }
 

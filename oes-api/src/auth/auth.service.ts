@@ -51,7 +51,10 @@ export class AuthService {
     }
   }
 
-  async login(email: string, password: string): Promise<Token> {
+  async login(
+    email: string,
+    password: string
+  ): Promise<Token & { user: User }> {
     const user = await this.prisma.user.findUnique({ where: { email } });
 
     if (!user) {
@@ -67,7 +70,7 @@ export class AuthService {
       throw new BadRequestException('Invalid password');
     }
 
-    return this.generateTokens({ userId: user.id });
+    return { ...this.generateTokens({ userId: user.id }), user };
   }
 
   validateUser(userId: string): Promise<User> {

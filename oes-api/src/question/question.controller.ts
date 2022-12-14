@@ -56,5 +56,6 @@ export class QuestionController {
   @Post()
   async createQuestion(@Body() data: CreateQuestionInput): Promise<Question> {
     return this.questionService.createQuestion(data);
+
   }
 }

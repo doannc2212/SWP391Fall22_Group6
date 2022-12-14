@@ -2,7 +2,7 @@ import type { Config } from './config.interface';
 
 const config: Config = {
   nest: {
-    port: 8080,
+    port: 8079,
   },
   cors: {
     enabled: true,

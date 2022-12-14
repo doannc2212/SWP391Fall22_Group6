@@ -56,5 +56,6 @@ export class ExaminationController {
   @Post()
   async createExamination(@Body() data: CreateExaminationInput): Promise<Examination> {
     return this.examinationService.createExamination(data);
+
   }
 }

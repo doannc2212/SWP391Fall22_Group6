@@ -78,6 +78,7 @@ dependencies:
   passport: 0.6.0
   passport-jwt: 4.0.0
   reflect-metadata: 0.1.13
+  rimraf: 3.0.2
   rxjs: 7.5.6
 
 devDependencies:
@@ -103,7 +104,6 @@ devDependencies:
   prisma: 4.1.0
   prisma-dbml-generator: 0.10.0-dev.0
   prisma-erd-generator: 1.2.4_zcg6hankkdp7pfe3q4ugge2cy4
-  rimraf: 3.0.2
   supertest: 6.2.4
   ts-jest: 28.0.7_bi2kohzqnxavgozw3csgny5hju
   ts-loader: 9.3.1_typescript@4.7.4

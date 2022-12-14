@@ -17,6 +17,10 @@ import { QuestionModule} from './question/question.module';
 import { ExaminationModule} from './examination/examination.module';
 import { answerModule} from './answer/answer.module';
 
+import { TopicModule} from './topic/topic.module';
+import { QuestionModule} from './question/question.module';
+import { ExaminationModule} from './examination/examination.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true, load: [config] }),
@@ -40,7 +44,7 @@ import { answerModule} from './answer/answer.module';
     ExaminationModule,
     answerModule
   ],
-  controllers: [AppController],
-  providers: [AppService, AppResolver],
+  controllers: [AppController, AnswerController],
+  providers: [AppService, AppResolver, AnswerService],
 })
 export class AppModule {}

@@ -9,7 +9,7 @@ export class AuthController {
 
   @Post('login')
   async login(@Body() { email, password }: LoginInput) {
-    const { accessToken, refreshToken } = await this.auth.login(
+    const { accessToken, refreshToken, user } = await this.auth.login(
       email.toLowerCase(),
       password
     );
@@ -17,6 +17,10 @@ export class AuthController {
     return {
       accessToken,
       refreshToken,
+      user: {
+        ...user,
+        password: undefined,
+      },
     };
   }
 
