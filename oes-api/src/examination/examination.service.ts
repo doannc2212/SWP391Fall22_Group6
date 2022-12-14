@@ -95,15 +95,17 @@ export class ExaminationService {
   }
 
   async createExamination(data: CreateExaminationInput) {
-    const { name, code } = data;
+    const { id, startAt, status, isEnabled } = data;
     try {
-      // const response = await this.prisma.examination.create({
-      //   data: {
-      //     id: name,
-      //     isEnabled: code,
-      //   },
-      // });
-      // return response;
+      const response = await this.prisma.examination.create({
+        data: {
+          id: id,
+          startAt: startAt,
+          status: status,
+          isEnabled: isEnabled
+        },
+      });
+      return response;
     } catch (e) {
       if (
         e instanceof Prisma.PrismaClientKnownRequestError &&
